@@ -8,9 +8,9 @@ RSpec.describe "FoodEnquetes", type: :request do
         get "/food_enquetes/new"
         expect(response).to have_http_status(200)
 
-        post "/food_enquetes", params: { food_enquete: FactoryBot.attributes_fot(:food_enquete_tanaka)}
+        post "/food_enquetes", params: { food_enquete: FactoryBot.attributes_for(:food_enquete_tanaka)}
         follow_redirect!
-        expect(response.body).to include "お食事に関するアンケートを送信しました"
+        expect(response.body).to include "ご回答ありがとうございました"
       end
     end
   end
@@ -20,8 +20,8 @@ RSpec.describe "FoodEnquetes", type: :request do
       it "エラーメッセージが表示されること" do
         get "/food_enquetes/new"
         expect(response).to have_http_status(200)
-        post "/food_enquetes", params: { foodEnquete: {name: ""}}
-        expect(response.body).not_to include "お食事に関するアンケートを送信しました"
+        post "/food_enquetes", params: { food_enquete: {name: ""}}
+        expect(response.body).not_to include "ご回答ありがとうございました"
       end
     end
   end
